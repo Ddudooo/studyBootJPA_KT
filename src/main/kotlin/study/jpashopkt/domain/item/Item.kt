@@ -14,15 +14,15 @@ import javax.persistence.ManyToMany
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 abstract class Item(
-    var name: String,
-    var price: Int,
-    var stockQuantity: Int
+    open var name: String,
+    open var price: Int,
+    open var stockQuantity: Int
 ) {
     @Id
     @GeneratedValue
     @Column(name = "item_id")
-    var id: Long? = null
+    open var id: Long? = null
 
     @ManyToMany(mappedBy = "items")
-    var categories: MutableList<Category> = mutableListOf()
+    open var categories: MutableList<Category> = mutableListOf()
 }
