@@ -17,7 +17,7 @@ class Delivery(
     var id: Long? = null,
 
     @OneToOne(mappedBy = "delivery")
-    var order: Order,
+    var order: Order? = null,
 
     @Embedded
     var address: Address,

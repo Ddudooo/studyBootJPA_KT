@@ -1,6 +1,7 @@
 package study.jpashopkt.domain
 
 import java.time.LocalDateTime
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -26,7 +27,7 @@ class Order(
     @JoinColumn(name = "member_id")
     var member: Member,
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = [CascadeType.ALL])
     var orderItems: MutableList<OrderItem> = mutableListOf(),
 
     @OneToOne(fetch = FetchType.LAZY)
