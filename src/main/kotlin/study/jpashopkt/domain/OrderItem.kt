@@ -22,8 +22,22 @@ class OrderItem(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
-    var order: Order,
+    var order: Order? = null,
 
     var orderPrice: Int = 0,
     var count: Int = 0
-)
+) {
+    fun cancel() {
+        item.addStock(count)
+    }
+
+    fun getTotalPrice(): Int {
+        return this.orderPrice * this.count
+    }
+}
+
+fun createOrderItem(item: Item, orderPrice: Int, count: Int): OrderItem {
+    val orderItem: OrderItem = OrderItem(item = item, orderPrice = orderPrice, count = count)
+    item.removeStock(count)
+    return orderItem
+}
