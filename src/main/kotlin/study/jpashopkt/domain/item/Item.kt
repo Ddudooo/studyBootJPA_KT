@@ -1,6 +1,7 @@
 package study.jpashopkt.domain.item
 
 import study.jpashopkt.domain.Category
+import study.jpashopkt.exception.NotEnoughStockException
 import javax.persistence.Column
 import javax.persistence.DiscriminatorColumn
 import javax.persistence.Entity
@@ -25,4 +26,22 @@ abstract class Item(
 
     @ManyToMany(mappedBy = "items")
     open var categories: MutableList<Category> = mutableListOf()
+
+    /**
+     * stock 증가
+     */
+    fun addStock(quantity: Int) {
+        this.stockQuantity += quantity
+    }
+
+    /**
+     * stock 감소
+     */
+    fun removeStock(quantity: Int) {
+        val restStock: Int = this.stockQuantity - quantity
+        if (restStock < 0) {
+            throw NotEnoughStockException("need more stock")
+        }
+        this.stockQuantity = restStock
+    }
 }
