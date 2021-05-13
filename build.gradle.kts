@@ -6,8 +6,8 @@ plugins {
     kotlin("jvm") version "1.4.32"
     kotlin("plugin.spring") version "1.4.32"
     kotlin("plugin.jpa") version "1.4.32"
-    kotlin("plugin.allopen")  version "1.4.32"
-    kotlin("plugin.noarg")    version "1.4.32"
+    kotlin("plugin.allopen") version "1.4.32"
+    kotlin("plugin.noarg") version "1.4.32"
 }
 
 group = "study"
@@ -22,11 +22,15 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1")
+
+    //logging
+    implementation("io.github.microutils:kotlin-logging-jvm:2.0.6")
 
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")

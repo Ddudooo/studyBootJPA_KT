@@ -1,6 +1,7 @@
 package study.jpashopkt.domain
 
 import study.jpashopkt.domain.item.Item
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -20,7 +21,7 @@ class OrderItem(
     @JoinColumn(name = "item_id")
     var item: Item,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "order_id")
     var order: Order? = null,
 
