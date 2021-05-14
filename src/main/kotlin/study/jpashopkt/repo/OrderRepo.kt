@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.util.StringUtils
 import study.jpashopkt.domain.Order
 import study.jpashopkt.dto.OrderSearch
+import study.jpashopkt.dto.SimpleOrderDto
 import javax.persistence.EntityManager
 
 @Repository
@@ -55,5 +56,25 @@ class OrderRepo(
         }
 
         return resultQuery.resultList
+    }
+
+    fun findAllWithMemberDelivery(): List<Order> {
+        return em.createQuery(
+            "select o From Order o " +
+                    "join fetch o.member m " +
+                    "join fetch o.delivery d",
+            Order::class.java
+        )
+            .resultList
+    }
+
+    fun findOrderDtos(): List<SimpleOrderDto> {
+        return em.createQuery(
+            "select new study.jpashopkt.dto.SimpleOrderDto(o.id, m.name, o.orderDate, o.status, d.address) " +
+                    "from Order o " +
+                    "join o.member m " +
+                    "join o.delivery d ", SimpleOrderDto::class.java
+        )
+            .resultList
     }
 }

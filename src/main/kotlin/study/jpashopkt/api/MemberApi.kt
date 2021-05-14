@@ -14,7 +14,7 @@ import java.util.stream.Collectors
 import javax.validation.Valid
 import javax.validation.constraints.NotEmpty
 
-val log = KotlinLogging.logger { }
+private val log = KotlinLogging.logger { }
 
 @RestController
 class MemberApi(
