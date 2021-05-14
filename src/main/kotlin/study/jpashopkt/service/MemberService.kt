@@ -31,4 +31,10 @@ class MemberService(
     fun findOne(memberId: Long): Member {
         return memberRepo.findOne(memberId)
     }
+
+    @Transactional
+    fun update(id: Long, name: String) {
+        val member = memberRepo.findOne(id)
+        member.name = name
+    }
 }

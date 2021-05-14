@@ -1,5 +1,6 @@
 package study.jpashopkt.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.Column
 import javax.persistence.Embedded
 import javax.persistence.Entity
@@ -20,6 +21,7 @@ class Member(
     @Embedded
     var address: Address,
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     var orders: MutableList<Order> = mutableListOf()
 )
