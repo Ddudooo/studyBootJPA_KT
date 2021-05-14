@@ -78,5 +78,7 @@ class Order(
 }
 
 fun createOrder(member: Member, delivery: Delivery, vararg orderItems: OrderItem): Order {
-    return Order(member = member, delivery = delivery, orderItems = mutableListOf(*orderItems))
+    val order = Order(member = member, delivery = delivery, orderItems = mutableListOf(*orderItems))
+    orderItems.forEach { it.order = order }
+    return order
 }

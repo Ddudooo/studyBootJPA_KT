@@ -35,7 +35,6 @@ class OrderService(
 
         //주문 생성
         val createOrder = createOrder(member, delivery, createdOrderItem)
-        createdOrderItem.order = createOrder
 
         //주문 저장
         orderRepo.save(createOrder)

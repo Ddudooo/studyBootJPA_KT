@@ -1,5 +1,6 @@
 package study.jpashopkt.controller
 
+import mu.KotlinLogging
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,6 +15,9 @@ import study.jpashopkt.dto.OrderSearch
 import study.jpashopkt.service.ItemService
 import study.jpashopkt.service.MemberService
 import study.jpashopkt.service.OrderService
+
+private val log = KotlinLogging.logger { }
+
 
 @Controller
 class OrderController(
@@ -48,6 +52,12 @@ class OrderController(
     ): String {
         val orders: List<Order> = orderService.findOrders(orderSearch)
         model.addAttribute("orders", orders)
+        log.info("orders size ${orders.size}")
+        for (order in orders) {
+            log.info("order ${order.orderItems.size}")
+            for (orderItem in order.orderItems)
+                log.info("          $orderItem")
+        }
         return "order/orderList"
     }
 
