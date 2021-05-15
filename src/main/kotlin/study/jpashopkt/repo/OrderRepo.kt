@@ -77,4 +77,26 @@ class OrderRepo(
         )
             .resultList
     }
+
+    fun findAllWithItem(): MutableList<Order> {
+        return em.createQuery(
+            "select distinct o from Order o " +
+                    "join fetch o.member m " +
+                    "join fetch o.delivery " +
+                    "join fetch o.orderItems oi " +
+                    "join fetch oi.item i", Order::class.java
+        )
+            .resultList ?: mutableListOf()
+    }
+
+    fun findAllWithMemberDelivery(offset: Int, limit: Int): List<Order> {
+        return em.createQuery(
+            "select o From Order o " +
+                    "join fetch o.member m " +
+                    "join fetch o.delivery d", Order::class.java
+        )
+            .setFirstResult(offset)
+            .setMaxResults(limit)
+            .resultList
+    }
 }
